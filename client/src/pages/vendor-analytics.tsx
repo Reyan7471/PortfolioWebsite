@@ -473,6 +473,182 @@ export default function VendorAnalytics() {
                   Add Vendor
                 </Button>
               </DialogTrigger>
+              <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle>Add New Vendor</DialogTitle>
+                </DialogHeader>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-4">
+                  <div>
+                    <label className="text-sm font-medium">Vendor Name *</label>
+                    <Input
+                      value={newVendor.name}
+                      onChange={(e) => setNewVendor(prev => ({ ...prev, name: e.target.value }))}
+                      placeholder="Enter vendor name"
+                      data-testid="new-vendor-name"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium">Category *</label>
+                    <Select 
+                      value={newVendor.category} 
+                      onValueChange={(value) => setNewVendor(prev => ({ ...prev, category: value }))}
+                    >
+                      <SelectTrigger data-testid="new-vendor-category">
+                        <SelectValue placeholder="Select category" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Technology">Technology</SelectItem>
+                        <SelectItem value="Manufacturing">Manufacturing</SelectItem>
+                        <SelectItem value="Services">Services</SelectItem>
+                        <SelectItem value="Logistics">Logistics</SelectItem>
+                        <SelectItem value="Raw Materials">Raw Materials</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium">Contact Email</label>
+                    <Input
+                      type="email"
+                      value={newVendor.contactEmail}
+                      onChange={(e) => setNewVendor(prev => ({ ...prev, contactEmail: e.target.value }))}
+                      placeholder="contact@vendor.com"
+                      data-testid="new-vendor-email"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium">Contact Phone</label>
+                    <Input
+                      value={newVendor.contactPhone}
+                      onChange={(e) => setNewVendor(prev => ({ ...prev, contactPhone: e.target.value }))}
+                      placeholder="+1-555-0123"
+                      data-testid="new-vendor-phone"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium">Location</label>
+                    <Input
+                      value={newVendor.location}
+                      onChange={(e) => setNewVendor(prev => ({ ...prev, location: e.target.value }))}
+                      placeholder="City, Country"
+                      data-testid="new-vendor-location"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium">Payment Terms</label>
+                    <Select 
+                      value={newVendor.paymentTerms} 
+                      onValueChange={(value) => setNewVendor(prev => ({ ...prev, paymentTerms: value }))}
+                    >
+                      <SelectTrigger data-testid="new-vendor-payment">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Net 15">Net 15</SelectItem>
+                        <SelectItem value="Net 30">Net 30</SelectItem>
+                        <SelectItem value="Net 45">Net 45</SelectItem>
+                        <SelectItem value="Net 60">Net 60</SelectItem>
+                        <SelectItem value="Net 90">Net 90</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium">Performance (%)</label>
+                    <Input
+                      type="number"
+                      min="0"
+                      max="100"
+                      value={newVendor.performance}
+                      onChange={(e) => setNewVendor(prev => ({ ...prev, performance: parseInt(e.target.value) || 0 }))}
+                      data-testid="new-vendor-performance"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium">Expected Revenue</label>
+                    <Input
+                      type="number"
+                      min="0"
+                      value={newVendor.revenue}
+                      onChange={(e) => setNewVendor(prev => ({ ...prev, revenue: parseInt(e.target.value) || 0 }))}
+                      placeholder="0"
+                      data-testid="new-vendor-revenue"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium">Rating (1-5)</label>
+                    <Input
+                      type="number"
+                      min="1"
+                      max="5"
+                      step="0.1"
+                      value={newVendor.rating}
+                      onChange={(e) => setNewVendor(prev => ({ ...prev, rating: parseFloat(e.target.value) || 4.0 }))}
+                      data-testid="new-vendor-rating"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium">Delivery Time (days)</label>
+                    <Input
+                      type="number"
+                      min="0"
+                      step="0.1"
+                      value={newVendor.deliveryTime}
+                      onChange={(e) => setNewVendor(prev => ({ ...prev, deliveryTime: parseFloat(e.target.value) || 3.0 }))}
+                      data-testid="new-vendor-delivery"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium">Risk Level</label>
+                    <Select 
+                      value={newVendor.riskLevel} 
+                      onValueChange={(value) => setNewVendor(prev => ({ ...prev, riskLevel: value as 'low' | 'medium' | 'high' }))}
+                    >
+                      <SelectTrigger data-testid="new-vendor-risk">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="low">Low Risk</SelectItem>
+                        <SelectItem value="medium">Medium Risk</SelectItem>
+                        <SelectItem value="high">High Risk</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium">Status</label>
+                    <Select 
+                      value={newVendor.status} 
+                      onValueChange={(value) => setNewVendor(prev => ({ ...prev, status: value as 'excellent' | 'good' | 'average' | 'poor' }))}
+                    >
+                      <SelectTrigger data-testid="new-vendor-status">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="excellent">Excellent</SelectItem>
+                        <SelectItem value="good">Good</SelectItem>
+                        <SelectItem value="average">Average</SelectItem>
+                        <SelectItem value="poor">Poor</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="md:col-span-2">
+                    <label className="text-sm font-medium">Notes</label>
+                    <Textarea
+                      value={newVendor.notes}
+                      onChange={(e) => setNewVendor(prev => ({ ...prev, notes: e.target.value }))}
+                      placeholder="Additional notes about the vendor..."
+                      rows={3}
+                      data-testid="new-vendor-notes"
+                    />
+                  </div>
+                </div>
+                <div className="flex justify-end gap-2">
+                  <Button variant="outline" onClick={() => setIsAddVendorOpen(false)}>
+                    Cancel
+                  </Button>
+                  <Button onClick={addVendor} data-testid="save-vendor">
+                    Add Vendor
+                  </Button>
+                </div>
+              </DialogContent>
             </Dialog>
           </div>
         </div>
@@ -937,183 +1113,6 @@ export default function VendorAnalytics() {
           </CardContent>
         </Card>
 
-        {/* Add Vendor Dialog */}
-        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle>Add New Vendor</DialogTitle>
-          </DialogHeader>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-4">
-            <div>
-              <label className="text-sm font-medium">Vendor Name *</label>
-              <Input
-                value={newVendor.name}
-                onChange={(e) => setNewVendor(prev => ({ ...prev, name: e.target.value }))}
-                placeholder="Enter vendor name"
-                data-testid="new-vendor-name"
-              />
-            </div>
-            <div>
-              <label className="text-sm font-medium">Category *</label>
-              <Select 
-                value={newVendor.category} 
-                onValueChange={(value) => setNewVendor(prev => ({ ...prev, category: value }))}
-              >
-                <SelectTrigger data-testid="new-vendor-category">
-                  <SelectValue placeholder="Select category" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Technology">Technology</SelectItem>
-                  <SelectItem value="Manufacturing">Manufacturing</SelectItem>
-                  <SelectItem value="Services">Services</SelectItem>
-                  <SelectItem value="Logistics">Logistics</SelectItem>
-                  <SelectItem value="Raw Materials">Raw Materials</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <label className="text-sm font-medium">Contact Email</label>
-              <Input
-                type="email"
-                value={newVendor.contactEmail}
-                onChange={(e) => setNewVendor(prev => ({ ...prev, contactEmail: e.target.value }))}
-                placeholder="contact@vendor.com"
-                data-testid="new-vendor-email"
-              />
-            </div>
-            <div>
-              <label className="text-sm font-medium">Contact Phone</label>
-              <Input
-                value={newVendor.contactPhone}
-                onChange={(e) => setNewVendor(prev => ({ ...prev, contactPhone: e.target.value }))}
-                placeholder="+1-555-0123"
-                data-testid="new-vendor-phone"
-              />
-            </div>
-            <div>
-              <label className="text-sm font-medium">Location</label>
-              <Input
-                value={newVendor.location}
-                onChange={(e) => setNewVendor(prev => ({ ...prev, location: e.target.value }))}
-                placeholder="City, Country"
-                data-testid="new-vendor-location"
-              />
-            </div>
-            <div>
-              <label className="text-sm font-medium">Payment Terms</label>
-              <Select 
-                value={newVendor.paymentTerms} 
-                onValueChange={(value) => setNewVendor(prev => ({ ...prev, paymentTerms: value }))}
-              >
-                <SelectTrigger data-testid="new-vendor-payment">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Net 15">Net 15</SelectItem>
-                  <SelectItem value="Net 30">Net 30</SelectItem>
-                  <SelectItem value="Net 45">Net 45</SelectItem>
-                  <SelectItem value="Net 60">Net 60</SelectItem>
-                  <SelectItem value="Net 90">Net 90</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <label className="text-sm font-medium">Performance (%)</label>
-              <Input
-                type="number"
-                min="0"
-                max="100"
-                value={newVendor.performance}
-                onChange={(e) => setNewVendor(prev => ({ ...prev, performance: parseInt(e.target.value) || 0 }))}
-                data-testid="new-vendor-performance"
-              />
-            </div>
-            <div>
-              <label className="text-sm font-medium">Expected Revenue</label>
-              <Input
-                type="number"
-                min="0"
-                value={newVendor.revenue}
-                onChange={(e) => setNewVendor(prev => ({ ...prev, revenue: parseInt(e.target.value) || 0 }))}
-                placeholder="0"
-                data-testid="new-vendor-revenue"
-              />
-            </div>
-            <div>
-              <label className="text-sm font-medium">Rating (1-5)</label>
-              <Input
-                type="number"
-                min="1"
-                max="5"
-                step="0.1"
-                value={newVendor.rating}
-                onChange={(e) => setNewVendor(prev => ({ ...prev, rating: parseFloat(e.target.value) || 4.0 }))}
-                data-testid="new-vendor-rating"
-              />
-            </div>
-            <div>
-              <label className="text-sm font-medium">Delivery Time (days)</label>
-              <Input
-                type="number"
-                min="0"
-                step="0.1"
-                value={newVendor.deliveryTime}
-                onChange={(e) => setNewVendor(prev => ({ ...prev, deliveryTime: parseFloat(e.target.value) || 3.0 }))}
-                data-testid="new-vendor-delivery"
-              />
-            </div>
-            <div>
-              <label className="text-sm font-medium">Risk Level</label>
-              <Select 
-                value={newVendor.riskLevel} 
-                onValueChange={(value) => setNewVendor(prev => ({ ...prev, riskLevel: value as 'low' | 'medium' | 'high' }))}
-              >
-                <SelectTrigger data-testid="new-vendor-risk">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="low">Low Risk</SelectItem>
-                  <SelectItem value="medium">Medium Risk</SelectItem>
-                  <SelectItem value="high">High Risk</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <label className="text-sm font-medium">Status</label>
-              <Select 
-                value={newVendor.status} 
-                onValueChange={(value) => setNewVendor(prev => ({ ...prev, status: value as 'excellent' | 'good' | 'average' | 'poor' }))}
-              >
-                <SelectTrigger data-testid="new-vendor-status">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="excellent">Excellent</SelectItem>
-                  <SelectItem value="good">Good</SelectItem>
-                  <SelectItem value="average">Average</SelectItem>
-                  <SelectItem value="poor">Poor</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="md:col-span-2">
-              <label className="text-sm font-medium">Notes</label>
-              <Textarea
-                value={newVendor.notes}
-                onChange={(e) => setNewVendor(prev => ({ ...prev, notes: e.target.value }))}
-                placeholder="Additional notes about the vendor..."
-                rows={3}
-                data-testid="new-vendor-notes"
-              />
-            </div>
-          </div>
-          <div className="flex justify-end gap-2">
-            <Button variant="outline" onClick={() => setIsAddVendorOpen(false)}>
-              Cancel
-            </Button>
-            <Button onClick={addVendor} data-testid="save-vendor">
-              Add Vendor
-            </Button>
-          </div>
-        </DialogContent>
 
         {/* Vendor Detail Modal */}
         {selectedVendor && !isEditVendorOpen && (
@@ -1216,6 +1215,193 @@ export default function VendorAnalytics() {
                 </Button>
                 <Button onClick={() => setSelectedVendor(null)}>
                   Close
+                </Button>
+              </div>
+            </DialogContent>
+          </Dialog>
+        )}
+
+        {/* Edit Vendor Dialog */}
+        {selectedVendor && isEditVendorOpen && (
+          <Dialog open={isEditVendorOpen} onOpenChange={() => {
+            setIsEditVendorOpen(false);
+            setSelectedVendor(null);
+          }}>
+            <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle>Edit Vendor: {selectedVendor.name}</DialogTitle>
+              </DialogHeader>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-4">
+                <div>
+                  <label className="text-sm font-medium">Vendor Name *</label>
+                  <Input
+                    value={selectedVendor.name}
+                    onChange={(e) => setSelectedVendor(prev => prev ? ({ ...prev, name: e.target.value }) : null)}
+                    placeholder="Enter vendor name"
+                    data-testid="edit-vendor-name"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-medium">Category *</label>
+                  <Select 
+                    value={selectedVendor.category} 
+                    onValueChange={(value) => setSelectedVendor(prev => prev ? ({ ...prev, category: value }) : null)}
+                  >
+                    <SelectTrigger data-testid="edit-vendor-category">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Technology">Technology</SelectItem>
+                      <SelectItem value="Manufacturing">Manufacturing</SelectItem>
+                      <SelectItem value="Services">Services</SelectItem>
+                      <SelectItem value="Logistics">Logistics</SelectItem>
+                      <SelectItem value="Raw Materials">Raw Materials</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <label className="text-sm font-medium">Contact Email</label>
+                  <Input
+                    type="email"
+                    value={selectedVendor.contactEmail}
+                    onChange={(e) => setSelectedVendor(prev => prev ? ({ ...prev, contactEmail: e.target.value }) : null)}
+                    placeholder="contact@vendor.com"
+                    data-testid="edit-vendor-email"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-medium">Contact Phone</label>
+                  <Input
+                    value={selectedVendor.contactPhone}
+                    onChange={(e) => setSelectedVendor(prev => prev ? ({ ...prev, contactPhone: e.target.value }) : null)}
+                    placeholder="+1-555-0123"
+                    data-testid="edit-vendor-phone"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-medium">Location</label>
+                  <Input
+                    value={selectedVendor.location}
+                    onChange={(e) => setSelectedVendor(prev => prev ? ({ ...prev, location: e.target.value }) : null)}
+                    placeholder="City, Country"
+                    data-testid="edit-vendor-location"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-medium">Payment Terms</label>
+                  <Select 
+                    value={selectedVendor.paymentTerms} 
+                    onValueChange={(value) => setSelectedVendor(prev => prev ? ({ ...prev, paymentTerms: value }) : null)}
+                  >
+                    <SelectTrigger data-testid="edit-vendor-payment">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Net 15">Net 15</SelectItem>
+                      <SelectItem value="Net 30">Net 30</SelectItem>
+                      <SelectItem value="Net 45">Net 45</SelectItem>
+                      <SelectItem value="Net 60">Net 60</SelectItem>
+                      <SelectItem value="Net 90">Net 90</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <label className="text-sm font-medium">Performance (%)</label>
+                  <Input
+                    type="number"
+                    min="0"
+                    max="100"
+                    value={selectedVendor.performance}
+                    onChange={(e) => setSelectedVendor(prev => prev ? ({ ...prev, performance: parseInt(e.target.value) || 0 }) : null)}
+                    data-testid="edit-vendor-performance"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-medium">Revenue</label>
+                  <Input
+                    type="number"
+                    min="0"
+                    value={selectedVendor.revenue}
+                    onChange={(e) => setSelectedVendor(prev => prev ? ({ ...prev, revenue: parseInt(e.target.value) || 0 }) : null)}
+                    data-testid="edit-vendor-revenue"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-medium">Rating (1-5)</label>
+                  <Input
+                    type="number"
+                    min="1"
+                    max="5"
+                    step="0.1"
+                    value={selectedVendor.rating}
+                    onChange={(e) => setSelectedVendor(prev => prev ? ({ ...prev, rating: parseFloat(e.target.value) || 4.0 }) : null)}
+                    data-testid="edit-vendor-rating"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-medium">Delivery Time (days)</label>
+                  <Input
+                    type="number"
+                    min="0"
+                    step="0.1"
+                    value={selectedVendor.deliveryTime}
+                    onChange={(e) => setSelectedVendor(prev => prev ? ({ ...prev, deliveryTime: parseFloat(e.target.value) || 3.0 }) : null)}
+                    data-testid="edit-vendor-delivery"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-medium">Risk Level</label>
+                  <Select 
+                    value={selectedVendor.riskLevel} 
+                    onValueChange={(value) => setSelectedVendor(prev => prev ? ({ ...prev, riskLevel: value as 'low' | 'medium' | 'high' }) : null)}
+                  >
+                    <SelectTrigger data-testid="edit-vendor-risk">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="low">Low Risk</SelectItem>
+                      <SelectItem value="medium">Medium Risk</SelectItem>
+                      <SelectItem value="high">High Risk</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <label className="text-sm font-medium">Status</label>
+                  <Select 
+                    value={selectedVendor.status} 
+                    onValueChange={(value) => setSelectedVendor(prev => prev ? ({ ...prev, status: value as 'excellent' | 'good' | 'average' | 'poor' }) : null)}
+                  >
+                    <SelectTrigger data-testid="edit-vendor-status">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="excellent">Excellent</SelectItem>
+                      <SelectItem value="good">Good</SelectItem>
+                      <SelectItem value="average">Average</SelectItem>
+                      <SelectItem value="poor">Poor</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="md:col-span-2">
+                  <label className="text-sm font-medium">Notes</label>
+                  <Textarea
+                    value={selectedVendor.notes}
+                    onChange={(e) => setSelectedVendor(prev => prev ? ({ ...prev, notes: e.target.value }) : null)}
+                    placeholder="Additional notes about the vendor..."
+                    rows={3}
+                    data-testid="edit-vendor-notes"
+                  />
+                </div>
+              </div>
+              <div className="flex justify-end gap-2">
+                <Button variant="outline" onClick={() => {
+                  setIsEditVendorOpen(false);
+                  setSelectedVendor(null);
+                }}>
+                  Cancel
+                </Button>
+                <Button onClick={() => selectedVendor && updateVendor(selectedVendor)} data-testid="update-vendor">
+                  Update Vendor
                 </Button>
               </div>
             </DialogContent>
