@@ -50,7 +50,7 @@ export default function About() {
                 <Target className="text-primary text-xl" />
                 <div>
                   <h4 className="font-semibold">Goal</h4>
-                  <p className="text-muted-foreground">Data Analyst or Python Developer role in innovative projects</p>
+                  <p className="text-muted-foreground">Data Analyst, Data Scientist, or Python Developer role in innovative projects</p>
                 </div>
               </div>
             </div>
