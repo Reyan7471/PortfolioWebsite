@@ -95,7 +95,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-semibold">LinkedIn</h4>
-                  <p className="text-blue-100">linkedin.com/in/ansari-reyanahmad</p>
+                  <p className="text-blue-100">linkedin.com/in/reyanansari7471</p>
                 </div>
               </div>
               
