@@ -26,7 +26,9 @@ export default function Projects() {
       description: "Comprehensive analytics dashboard using Python, MySQL, and Power BI to analyze vendor performance metrics and generate actionable insights.",
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
       category: "data",
-      tags: ["DATA ANALYTICS", "PYTHON"]
+      tags: ["DATA ANALYTICS", "PYTHON"],
+      github: "https://github.com/Reyan7471/vendor-analytics-dashboard",
+      demo: "/projects/vendor-analytics"
     },
     {
       id: "ai-resume-builder",
@@ -34,7 +36,9 @@ export default function Projects() {
       description: "Intelligent resume generation system using machine learning algorithms to create optimized resumes based on job requirements and user skills.",
       image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
       category: "ai",
-      tags: ["AI/ML", "PYTHON"]
+      tags: ["AI/ML", "PYTHON"],
+      github: "https://github.com/Reyan7471/ai-resume-builder",
+      demo: "/projects/ai-resume-builder"
     },
     {
       id: "advanced-chatbot",
@@ -42,7 +46,9 @@ export default function Projects() {
       description: "Sophisticated conversational AI built with Python featuring natural language processing, context awareness, and multi-domain knowledge.",
       image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
       category: "ai",
-      tags: ["CHATBOT", "NLP"]
+      tags: ["CHATBOT", "NLP"],
+      github: "https://github.com/Reyan7471/advanced-chatbot",
+      demo: "/projects/advanced-chatbot"
     },
     {
       id: "cv-builder-webapp",
@@ -50,7 +56,9 @@ export default function Projects() {
       description: "Modern web application for creating professional resumes with real-time preview, multiple templates, and PDF export functionality.",
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
       category: "web",
-      tags: ["WEB APP", "JAVASCRIPT"]
+      tags: ["WEB APP", "JAVASCRIPT"],
+      github: "https://github.com/Reyan7471/cv-builder-webapp",
+      demo: "/projects/cv-builder-webapp"
     },
     {
       id: "face-recognition",
@@ -58,7 +66,9 @@ export default function Projects() {
       description: "Real-time face detection and recognition system using OpenCV and machine learning algorithms for security and identification applications.",
       image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
       category: "ai",
-      tags: ["COMPUTER VISION", "OPENCV"]
+      tags: ["COMPUTER VISION", "OPENCV"],
+      github: "https://github.com/Reyan7471/face-recognition-system",
+      demo: "/projects/face-recognition"
     },
     {
       id: "data-visualization",
@@ -66,7 +76,9 @@ export default function Projects() {
       description: "Dynamic business intelligence dashboard featuring interactive visualizations, KPI tracking, and real-time data insights using Power BI.",
       image: "https://images.unsplash.com/photo-1666875753105-c63a6f3bdc86?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
       category: "data",
-      tags: ["VISUALIZATION", "POWER BI"]
+      tags: ["VISUALIZATION", "POWER BI"],
+      github: "https://github.com/Reyan7471/data-visualization-dashboard",
+      demo: "/projects/data-visualization"
     }
   ];
 
@@ -149,31 +161,25 @@ export default function Projects() {
                 <p className="text-muted-foreground mb-4" data-testid={`project-description-${project.id}`}>
                   {project.description}
                 </p>
-                <div className="flex justify-between items-center">
-                  <Button
-                    variant="ghost"
-                    className="text-primary font-semibold hover:underline p-0"
-                    onClick={() => window.open(`/projects/${project.id}`, '_blank')}
-                    data-testid={`project-view-${project.id}`}
-                  >
-                    View Project
-                  </Button>
+                <div className="flex flex-col gap-3">
                   <div className="flex gap-2">
                     <Button
-                      variant="ghost"
-                      size="icon"
-                      className="text-muted-foreground hover:text-foreground"
-                      data-testid={`project-github-${project.id}`}
-                    >
-                      <Github className="h-4 w-4" />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="text-muted-foreground hover:text-foreground"
+                      variant="outline"
+                      className="flex-1 text-primary border-primary hover:bg-primary hover:text-primary-foreground"
+                      onClick={() => window.open(project.demo, '_blank')}
                       data-testid={`project-demo-${project.id}`}
                     >
-                      <ExternalLink className="h-4 w-4" />
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      View Live Demo
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className="flex-1 text-muted-foreground border-muted-foreground hover:bg-muted-foreground hover:text-background"
+                      onClick={() => window.open(project.github, '_blank')}
+                      data-testid={`project-github-${project.id}`}
+                    >
+                      <Github className="h-4 w-4 mr-2" />
+                      View Source
                     </Button>
                   </div>
                 </div>
