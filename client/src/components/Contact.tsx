@@ -105,7 +105,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-semibold">GitHub</h4>
-                  <p className="text-blue-100">github.com/ansari-reyanahmad</p>
+                  <p className="text-blue-100">github.com/Reyan7471</p>
                 </div>
               </div>
             </div>
