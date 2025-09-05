@@ -51,16 +51,6 @@ export default function Projects() {
       demo: "/projects/advanced-chatbot"
     },
     {
-      id: "cv-builder-webapp",
-      title: "CV/Resume Builder Web App",
-      description: "Modern web application for creating professional resumes with real-time preview, multiple templates, and PDF export functionality.",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
-      category: "web",
-      tags: ["WEB APP", "JAVASCRIPT"],
-      github: "https://github.com/Reyan7471/cv-builder-webapp",
-      demo: "/projects/cv-builder-webapp"
-    },
-    {
       id: "face-recognition",
       title: "Face Recognition System",
       description: "Real-time face detection and recognition system using OpenCV and machine learning algorithms for security and identification applications.",
@@ -70,16 +60,6 @@ export default function Projects() {
       github: "https://github.com/Reyan7471/face-recognition-system",
       demo: "/projects/face-recognition"
     },
-    {
-      id: "data-visualization",
-      title: "Interactive Data Dashboard",
-      description: "Dynamic business intelligence dashboard featuring interactive visualizations, KPI tracking, and real-time data insights using Power BI.",
-      image: "https://images.unsplash.com/photo-1666875753105-c63a6f3bdc86?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400",
-      category: "data",
-      tags: ["VISUALIZATION", "POWER BI"],
-      github: "https://github.com/Reyan7471/data-visualization-dashboard",
-      demo: "/projects/data-visualization"
-    }
   ];
 
   const filters = [
