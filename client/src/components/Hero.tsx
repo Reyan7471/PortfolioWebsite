@@ -65,15 +65,6 @@ export default function Hero() {
               </Button>
             </div>
           </div>
-          <div className="flex justify-center lg:justify-end">
-            <div className="w-96 h-96 rounded-full overflow-hidden shadow-2xl" data-testid="hero-image">
-              <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800"
-                alt="Professional headshot"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
         </div>
       </div>
     </section>
