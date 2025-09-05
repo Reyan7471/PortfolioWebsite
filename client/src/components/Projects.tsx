@@ -153,6 +153,7 @@ export default function Projects() {
                   <Button
                     variant="ghost"
                     className="text-primary font-semibold hover:underline p-0"
+                    onClick={() => window.open(`/projects/${project.id}`, '_blank')}
                     data-testid={`project-view-${project.id}`}
                   >
                     View Project
