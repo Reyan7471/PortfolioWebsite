@@ -4,7 +4,7 @@ import { Download, ArrowRight } from "lucide-react";
 
 export default function Hero() {
   const [typedText, setTypedText] = useState("");
-  const fullText = "Ansari";
+  const fullText = "Reyan";
 
   useEffect(() => {
     let i = 0;
