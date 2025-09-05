@@ -184,15 +184,29 @@ export default function AIResumeBuilder() {
   };
 
   const downloadResume = () => {
-    // Create HTML content for the resume
+    // Open print dialog directly for PDF generation
+    const printWindow = window.open('', '_blank');
+    if (!printWindow) {
+      toast({
+        title: "Download Failed",
+        description: "Please allow popups and try again.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     const resumeContent = `
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>${resumeData.personalInfo.fullName} - Resume</title>
+  <title>${resumeData.personalInfo.fullName || 'Resume'}</title>
   <style>
-    body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; color: #333; }
+    @media print {
+      body { margin: 0; }
+      .no-print { display: none; }
+    }
+    body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; color: #333; max-width: 800px; }
     .header { text-align: center; border-bottom: 2px solid #2563eb; padding-bottom: 20px; margin-bottom: 30px; }
     .name { font-size: 2.5em; font-weight: bold; color: #2563eb; margin-bottom: 10px; }
     .contact { font-size: 1.1em; color: #666; }
@@ -204,15 +218,20 @@ export default function AIResumeBuilder() {
     .duration { color: #888; font-size: 0.9em; }
     .skills { display: flex; flex-wrap: wrap; gap: 8px; }
     .skill { background: #f3f4f6; padding: 4px 12px; border-radius: 15px; font-size: 0.9em; }
+    .print-instructions { background: #f0f9ff; border: 1px solid #0ea5e9; border-radius: 8px; padding: 15px; margin-bottom: 20px; }
   </style>
 </head>
 <body>
+  <div class="print-instructions no-print">
+    <strong>To save as PDF:</strong> Press Ctrl+P (or Cmd+P on Mac), then select "Save as PDF" as the destination.
+  </div>
+  
   <div class="header">
     <div class="name">${resumeData.personalInfo.fullName || 'Your Name'}</div>
     <div class="contact">
-      ${resumeData.personalInfo.email || ''} ${resumeData.personalInfo.phone ? '• ' + resumeData.personalInfo.phone : ''} ${resumeData.personalInfo.location ? '• ' + resumeData.personalInfo.location : ''}
+      ${resumeData.personalInfo.email || ''} ${resumeData.personalInfo.phone ? ' • ' + resumeData.personalInfo.phone : ''} ${resumeData.personalInfo.location ? ' • ' + resumeData.personalInfo.location : ''}
       <br>
-      ${resumeData.personalInfo.linkedin ? 'LinkedIn: ' + resumeData.personalInfo.linkedin : ''} ${resumeData.personalInfo.github ? '• GitHub: ' + resumeData.personalInfo.github : ''}
+      ${resumeData.personalInfo.linkedin ? 'LinkedIn: ' + resumeData.personalInfo.linkedin : ''} ${resumeData.personalInfo.github ? ' • GitHub: ' + resumeData.personalInfo.github : ''}
     </div>
   </div>
   
@@ -260,20 +279,15 @@ export default function AIResumeBuilder() {
 </html>
     `;
 
-    // Create and download the HTML file (which can be printed as PDF)
-    const blob = new Blob([resumeContent], { type: 'text/html' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `${resumeData.personalInfo.fullName || 'Resume'}.html`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-
+    printWindow.document.write(resumeContent);
+    printWindow.document.close();
+    
+    // Focus on the new window
+    printWindow.focus();
+    
     toast({
-      title: "Resume Downloaded!",
-      description: "Your resume has been saved as HTML. Open it and use your browser's Print to PDF function for a PDF version.",
+      title: "Resume Ready!",
+      description: "Your resume is now open in a new window. Use Ctrl+P (or Cmd+P) to save as PDF.",
     });
   };
 
@@ -303,7 +317,7 @@ export default function AIResumeBuilder() {
             data-testid="download-resume"
           >
             <Download className="mr-2 h-4 w-4" />
-            Download Resume
+            Generate PDF
           </Button>
         </div>
 

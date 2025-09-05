@@ -152,17 +152,31 @@ export default function CVBuilderWebApp() {
   const downloadCV = () => {
     const currentStyle = templateStyles[selectedTemplate as keyof typeof templateStyles];
     
-    // Create HTML content for the CV
+    // Open print dialog directly for PDF generation
+    const printWindow = window.open('', '_blank');
+    if (!printWindow) {
+      toast({
+        title: "Download Failed",
+        description: "Please allow popups and try again.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     const cvContent = `
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>${cvData.personalInfo.name} - CV</title>
+  <title>${cvData.personalInfo.name || 'CV'}</title>
   <style>
-    body { font-family: serif; line-height: 1.6; margin: 0; padding: 40px; color: #333; background: ${currentStyle.background}; }
-    .cv-container { max-width: 800px; margin: 0 auto; border-left: 4px solid ${currentStyle.primary}; padding-left: 40px; }
-    .header { text-center; border-bottom: 2px solid ${currentStyle.primary}; padding-bottom: 30px; margin-bottom: 30px; }
+    @media print {
+      body { margin: 0; }
+      .no-print { display: none; }
+    }
+    body { font-family: serif; line-height: 1.6; margin: 20px; color: #333; max-width: 800px; }
+    .cv-container { border-left: 4px solid ${currentStyle.primary}; padding-left: 40px; }
+    .header { text-align: center; border-bottom: 2px solid ${currentStyle.primary}; padding-bottom: 30px; margin-bottom: 30px; }
     .name { font-size: 3em; font-weight: bold; color: ${currentStyle.primary}; margin-bottom: 10px; }
     .title { font-size: 1.5em; color: #666; margin-bottom: 20px; }
     .contact { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; font-size: 1em; color: #666; }
@@ -174,18 +188,23 @@ export default function CVBuilderWebApp() {
     .duration { color: #888; font-size: 0.9em; float: right; }
     .skills { display: flex; flex-wrap: wrap; gap: 8px; }
     .skill { background: ${currentStyle.primary}20; color: ${currentStyle.primary}; padding: 6px 12px; border-radius: 4px; font-size: 0.9em; }
+    .print-instructions { background: #f0f9ff; border: 1px solid #0ea5e9; border-radius: 8px; padding: 15px; margin-bottom: 20px; }
   </style>
 </head>
 <body>
+  <div class="print-instructions no-print">
+    <strong>To save as PDF:</strong> Press Ctrl+P (or Cmd+P on Mac), then select "Save as PDF" as the destination.
+  </div>
+  
   <div class="cv-container">
     <div class="header">
       <div class="name">${cvData.personalInfo.name || 'Your Name'}</div>
       ${cvData.personalInfo.title ? `<div class="title">${cvData.personalInfo.title}</div>` : ''}
       <div class="contact">
         ${cvData.personalInfo.email ? `<span>${cvData.personalInfo.email}</span>` : ''}
-        ${cvData.personalInfo.phone ? `<span>${cvData.personalInfo.phone}</span>` : ''}
-        ${cvData.personalInfo.location ? `<span>${cvData.personalInfo.location}</span>` : ''}
-        ${cvData.personalInfo.website ? `<span>${cvData.personalInfo.website}</span>` : ''}
+        ${cvData.personalInfo.phone ? `<span> • ${cvData.personalInfo.phone}</span>` : ''}
+        ${cvData.personalInfo.location ? `<span> • ${cvData.personalInfo.location}</span>` : ''}
+        ${cvData.personalInfo.website ? `<span> • ${cvData.personalInfo.website}</span>` : ''}
       </div>
     </div>
     
@@ -222,20 +241,15 @@ export default function CVBuilderWebApp() {
 </html>
     `;
 
-    // Create and download the HTML file
-    const blob = new Blob([cvContent], { type: 'text/html' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `${cvData.personalInfo.name || 'CV'}_${selectedTemplate}.html`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-
+    printWindow.document.write(cvContent);
+    printWindow.document.close();
+    
+    // Focus on the new window
+    printWindow.focus();
+    
     toast({
-      title: "CV Downloaded!",
-      description: "Your CV has been saved as HTML. Open it and use your browser's Print to PDF function for a PDF version.",
+      title: "CV Ready!",
+      description: "Your CV is now open in a new window. Use Ctrl+P (or Cmd+P) to save as PDF.",
     });
   };
 
@@ -272,7 +286,7 @@ export default function CVBuilderWebApp() {
             </Button>
             <Button onClick={downloadCV} data-testid="download-cv">
               <Download className="mr-2 h-4 w-4" />
-              Download CV
+              Generate PDF
             </Button>
           </div>
         </div>
