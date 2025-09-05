@@ -184,9 +184,96 @@ export default function AIResumeBuilder() {
   };
 
   const downloadResume = () => {
+    // Create HTML content for the resume
+    const resumeContent = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>${resumeData.personalInfo.fullName} - Resume</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; color: #333; }
+    .header { text-align: center; border-bottom: 2px solid #2563eb; padding-bottom: 20px; margin-bottom: 30px; }
+    .name { font-size: 2.5em; font-weight: bold; color: #2563eb; margin-bottom: 10px; }
+    .contact { font-size: 1.1em; color: #666; }
+    .section { margin-bottom: 30px; }
+    .section-title { font-size: 1.4em; font-weight: bold; color: #2563eb; border-bottom: 1px solid #ddd; padding-bottom: 5px; margin-bottom: 15px; }
+    .experience-item, .education-item { margin-bottom: 20px; }
+    .job-title { font-weight: bold; font-size: 1.1em; }
+    .company { color: #666; font-style: italic; }
+    .duration { color: #888; font-size: 0.9em; }
+    .skills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill { background: #f3f4f6; padding: 4px 12px; border-radius: 15px; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="name">${resumeData.personalInfo.fullName || 'Your Name'}</div>
+    <div class="contact">
+      ${resumeData.personalInfo.email || ''} ${resumeData.personalInfo.phone ? '• ' + resumeData.personalInfo.phone : ''} ${resumeData.personalInfo.location ? '• ' + resumeData.personalInfo.location : ''}
+      <br>
+      ${resumeData.personalInfo.linkedin ? 'LinkedIn: ' + resumeData.personalInfo.linkedin : ''} ${resumeData.personalInfo.github ? '• GitHub: ' + resumeData.personalInfo.github : ''}
+    </div>
+  </div>
+  
+  ${resumeData.summary ? `
+  <div class="section">
+    <div class="section-title">Professional Summary</div>
+    <p>${resumeData.summary}</p>
+  </div>
+  ` : ''}
+  
+  ${resumeData.experiences.length > 0 ? `
+  <div class="section">
+    <div class="section-title">Work Experience</div>
+    ${resumeData.experiences.map(exp => `
+    <div class="experience-item">
+      <div class="job-title">${exp.position}</div>
+      <div class="company">${exp.company} • ${exp.duration}</div>
+      <p>${exp.description}</p>
+    </div>
+    `).join('')}
+  </div>
+  ` : ''}
+  
+  ${resumeData.education.length > 0 ? `
+  <div class="section">
+    <div class="section-title">Education</div>
+    ${resumeData.education.map(edu => `
+    <div class="education-item">
+      <div class="job-title">${edu.degree}</div>
+      <div class="company">${edu.institution} • ${edu.year}</div>
+    </div>
+    `).join('')}
+  </div>
+  ` : ''}
+  
+  ${resumeData.skills.length > 0 ? `
+  <div class="section">
+    <div class="section-title">Skills</div>
+    <div class="skills">
+      ${resumeData.skills.map(skill => `<span class="skill">${skill}</span>`).join('')}
+    </div>
+  </div>
+  ` : ''}
+</body>
+</html>
+    `;
+
+    // Create and download the HTML file (which can be printed as PDF)
+    const blob = new Blob([resumeContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${resumeData.personalInfo.fullName || 'Resume'}.html`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
     toast({
       title: "Resume Downloaded!",
-      description: "Your AI-generated resume has been saved as PDF.",
+      description: "Your resume has been saved as HTML. Open it and use your browser's Print to PDF function for a PDF version.",
     });
   };
 
@@ -216,7 +303,7 @@ export default function AIResumeBuilder() {
             data-testid="download-resume"
           >
             <Download className="mr-2 h-4 w-4" />
-            Download PDF
+            Download Resume
           </Button>
         </div>
 

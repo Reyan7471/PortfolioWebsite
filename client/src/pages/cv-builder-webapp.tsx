@@ -150,9 +150,92 @@ export default function CVBuilderWebApp() {
   };
 
   const downloadCV = () => {
+    const currentStyle = templateStyles[selectedTemplate as keyof typeof templateStyles];
+    
+    // Create HTML content for the CV
+    const cvContent = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>${cvData.personalInfo.name} - CV</title>
+  <style>
+    body { font-family: serif; line-height: 1.6; margin: 0; padding: 40px; color: #333; background: ${currentStyle.background}; }
+    .cv-container { max-width: 800px; margin: 0 auto; border-left: 4px solid ${currentStyle.primary}; padding-left: 40px; }
+    .header { text-center; border-bottom: 2px solid ${currentStyle.primary}; padding-bottom: 30px; margin-bottom: 30px; }
+    .name { font-size: 3em; font-weight: bold; color: ${currentStyle.primary}; margin-bottom: 10px; }
+    .title { font-size: 1.5em; color: #666; margin-bottom: 20px; }
+    .contact { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; font-size: 1em; color: #666; }
+    .section { margin-bottom: 30px; }
+    .section-title { font-size: 1.3em; font-weight: bold; color: ${currentStyle.secondary}; border-bottom: 1px solid ${currentStyle.accent}; padding-bottom: 5px; margin-bottom: 15px; }
+    .experience-item { margin-bottom: 20px; }
+    .job-title { font-weight: bold; color: ${currentStyle.primary}; font-size: 1.1em; }
+    .company { color: #666; margin-bottom: 10px; }
+    .duration { color: #888; font-size: 0.9em; float: right; }
+    .skills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill { background: ${currentStyle.primary}20; color: ${currentStyle.primary}; padding: 6px 12px; border-radius: 4px; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <div class="cv-container">
+    <div class="header">
+      <div class="name">${cvData.personalInfo.name || 'Your Name'}</div>
+      ${cvData.personalInfo.title ? `<div class="title">${cvData.personalInfo.title}</div>` : ''}
+      <div class="contact">
+        ${cvData.personalInfo.email ? `<span>${cvData.personalInfo.email}</span>` : ''}
+        ${cvData.personalInfo.phone ? `<span>${cvData.personalInfo.phone}</span>` : ''}
+        ${cvData.personalInfo.location ? `<span>${cvData.personalInfo.location}</span>` : ''}
+        ${cvData.personalInfo.website ? `<span>${cvData.personalInfo.website}</span>` : ''}
+      </div>
+    </div>
+    
+    ${cvData.sections.find(s => s.type === 'summary')?.content ? `
+    <div class="section">
+      <div class="section-title">Professional Summary</div>
+      <p>${cvData.sections.find(s => s.type === 'summary')?.content}</p>
+    </div>
+    ` : ''}
+    
+    ${cvData.sections.find(s => s.type === 'experience')?.content.length > 0 ? `
+    <div class="section">
+      <div class="section-title">Work Experience</div>
+      ${cvData.sections.find(s => s.type === 'experience')?.content.map((exp: any) => `
+      <div class="experience-item">
+        <div class="job-title">${exp.position} <span class="duration">${exp.duration}</span></div>
+        <div class="company">${exp.company}</div>
+        <p>${exp.description}</p>
+      </div>
+      `).join('')}
+    </div>
+    ` : ''}
+    
+    ${cvData.sections.find(s => s.type === 'skills')?.content.length > 0 ? `
+    <div class="section">
+      <div class="section-title">Skills</div>
+      <div class="skills">
+        ${cvData.sections.find(s => s.type === 'skills')?.content.map((skill: string) => `<span class="skill">${skill}</span>`).join('')}
+      </div>
+    </div>
+    ` : ''}
+  </div>
+</body>
+</html>
+    `;
+
+    // Create and download the HTML file
+    const blob = new Blob([cvContent], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${cvData.personalInfo.name || 'CV'}_${selectedTemplate}.html`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
     toast({
       title: "CV Downloaded!",
-      description: "Your CV has been saved as PDF with the selected template.",
+      description: "Your CV has been saved as HTML. Open it and use your browser's Print to PDF function for a PDF version.",
     });
   };
 
@@ -189,7 +272,7 @@ export default function CVBuilderWebApp() {
             </Button>
             <Button onClick={downloadCV} data-testid="download-cv">
               <Download className="mr-2 h-4 w-4" />
-              Download PDF
+              Download CV
             </Button>
           </div>
         </div>
