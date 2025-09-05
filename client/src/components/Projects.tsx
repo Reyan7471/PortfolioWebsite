@@ -161,27 +161,25 @@ export default function Projects() {
                 <p className="text-muted-foreground mb-4" data-testid={`project-description-${project.id}`}>
                   {project.description}
                 </p>
-                <div className="flex gap-2">
+                <div className="flex justify-between items-center">
                   <Button
-                    variant="outline"
-                    size="sm"
-                    className="flex-1 text-xs text-primary border-primary hover:bg-primary hover:text-primary-foreground"
+                    variant="ghost"
+                    className="text-primary font-semibold hover:underline p-0"
                     onClick={() => window.open(project.demo, '_blank')}
-                    data-testid={`project-demo-${project.id}`}
+                    data-testid={`project-view-${project.id}`}
                   >
-                    <ExternalLink className="h-3 w-3 mr-1" />
-                    Live Demo
+                    View Project
                   </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="flex-1 text-xs text-muted-foreground border-muted-foreground hover:bg-muted-foreground hover:text-background"
-                    onClick={() => window.open(project.github, '_blank')}
-                    data-testid={`project-github-${project.id}`}
-                  >
-                    <Github className="h-3 w-3 mr-1" />
-                    Source
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="text-muted-foreground hover:text-foreground"
+                      data-testid={`project-demo-${project.id}`}
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
