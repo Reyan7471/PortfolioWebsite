@@ -36,11 +36,11 @@ export default function Skills() {
     { name: "HTML/CSS", level: 95 }
   ];
 
-  const webTechnologies = [
-    "Responsive Design",
-    "Bootstrap", 
-    "jQuery",
-    "Form Validation"
+  const dataScienceSkills = [
+    "Machine Learning",
+    "Data Modeling", 
+    "Statistical Analysis",
+    "Data Visualization"
   ];
 
   const dataAnalytics = [
@@ -89,21 +89,21 @@ export default function Skills() {
             </CardContent>
           </Card>
 
-          {/* Web Development */}
-          <Card className="card-hover" data-testid="web-dev-skills-card">
+          {/* Data Science */}
+          <Card className="card-hover" data-testid="data-science-skills-card">
             <CardContent className="p-6">
               <div className="flex items-center mb-4">
                 <Globe className="text-accent text-2xl mr-3" />
-                <h3 className="text-xl font-bold">Web Development</h3>
+                <h3 className="text-xl font-bold">Data Science</h3>
               </div>
               <div className="flex flex-wrap gap-2">
-                {webTechnologies.map((tech) => (
+                {dataScienceSkills.map((skill) => (
                   <span
-                    key={tech}
+                    key={skill}
                     className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm"
-                    data-testid={`web-tech-${tech.toLowerCase().replace(/[\s/]/g, '-')}`}
+                    data-testid={`data-science-skill-${skill.toLowerCase().replace(/[\s/]/g, '-')}`}
                   >
-                    {tech}
+                    {skill}
                   </span>
                 ))}
               </div>
