@@ -1,0 +1,101 @@
+[{
+	"resource": "/c:/Users/reyan/vendor-analytics-dashboard/src/index.css",
+	"owner": "_generated_diagnostic_collection_name_#4",
+	"code": "unknownAtRules",
+	"severity": 4,
+	"message": "Unknown at rule @tailwind",
+	"source": "css",
+	"startLineNumber": 2,
+	"startColumn": 1,
+	"endLineNumber": 2,
+	"endColumn": 10,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/Users/reyan/vendor-analytics-dashboard/src/index.css",
+	"owner": "_generated_diagnostic_collection_name_#4",
+	"code": "unknownAtRules",
+	"severity": 4,
+	"message": "Unknown at rule @tailwind",
+	"source": "css",
+	"startLineNumber": 3,
+	"startColumn": 1,
+	"endLineNumber": 3,
+	"endColumn": 10,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/Users/reyan/vendor-analytics-dashboard/src/index.css",
+	"owner": "_generated_diagnostic_collection_name_#4",
+	"code": "unknownAtRules",
+	"severity": 4,
+	"message": "Unknown at rule @tailwind",
+	"source": "css",
+	"startLineNumber": 4,
+	"startColumn": 1,
+	"endLineNumber": 4,
+	"endColumn": 10,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/Users/reyan/vendor-analytics-dashboard/src/index.css",
+	"owner": "_generated_diagnostic_collection_name_#0",
+	"code": {
+		"value": "compat-api/css",
+		"target": {
+			"$mid": 1,
+			"path": "/docs/Web/CSS/@layer",
+			"scheme": "https",
+			"authority": "developer.mozilla.org"
+		}
+	},
+	"severity": 4,
+	"message": "'@layer' is not supported by Safari on iOS < 15.4.",
+	"source": "Microsoft Edge Tools",
+	"startLineNumber": 8,
+	"startColumn": 3,
+	"endLineNumber": 8,
+	"endColumn": 3,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/Users/reyan/vendor-analytics-dashboard/src/index.css",
+	"owner": "_generated_diagnostic_collection_name_#0",
+	"code": {
+		"value": "compat-api/css",
+		"target": {
+			"$mid": 1,
+			"path": "/docs/Web/CSS/@layer",
+			"scheme": "https",
+			"authority": "developer.mozilla.org"
+		}
+	},
+	"severity": 4,
+	"message": "'@layer' is not supported by Safari on iOS < 15.4.",
+	"source": "Microsoft Edge Tools",
+	"startLineNumber": 55,
+	"startColumn": 1,
+	"endLineNumber": 55,
+	"endColumn": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/Users/reyan/vendor-analytics-dashboard/src/index.css",
+	"owner": "_generated_diagnostic_collection_name_#4",
+	"code": "unknownAtRules",
+	"severity": 4,
+	"message": "Unknown at rule @apply",
+	"source": "css",
+	"startLineNumber": 57,
+	"startColumn": 5,
+	"endLineNumber": 57,
+	"endColumn": 11,
+	"origin": "extHost1"
+},{
+	"resource": "/c:/Users/reyan/vendor-analytics-dashboard/src/index.css",
+	"owner": "_generated_diagnostic_collection_name_#4",
+	"code": "unknownAtRules",
+	"severity": 4,
+	"message": "Unknown at rule @apply",
+	"source": "css",
+	"startLineNumber": 60,
+	"startColumn": 5,
+	"endLineNumber": 60,
+	"endColumn": 11,
+	"origin": "extHost1"
+}]
